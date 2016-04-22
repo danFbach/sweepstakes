@@ -8,8 +8,8 @@ namespace Sweepstakes
 {
     class Contestant
     {
-        string contestantName;
-        int lotteryNumber;
+        public string contestantName;
+        public int lotteryNumber;
         Random pickName = new Random();
         public Contestant(int lotteryNumber)
         {
@@ -52,7 +52,7 @@ namespace Sweepstakes
         }
         public override string ToString()
         {
-            return String.Format("Contestant {0}, sweepstakes ID number {1}", contestantName,lotteryNumber);
+            return String.Format("Contestant's Name: {0} || Sweepstakes ID Number: {1}", contestantName, lotteryNumber);
         }
     }
 }

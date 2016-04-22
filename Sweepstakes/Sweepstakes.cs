@@ -2,36 +2,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Sweepstakes
 {
     class Sweepstakes
     {
         string sweepstakesName;
-        List<Contestant> contestantList = new List<Contestant>();
+        Queue<Contestant> contestantQueue = new Queue<Contestant>();
+        Stack<Contestant> contestantStack = new Stack<Contestant>();
         public Sweepstakes(string sweepstakesName)
         {
             this.sweepstakesName = sweepstakesName;
         }
-        public void registerContestant(Contestant contestant)
+        public void registeQueuerContestant(Contestant contestant)
         {
-            contestantList.Add(contestant);
+            contestantQueue.Enqueue(contestant);
         }
-        Contestant pickWinner()
+        public void registerStackContestant(Contestant contestant)
         {
-            return contestantList[2];
+            contestantStack.Push(contestant);
         }
-        public void printContestantInfo()
+        public Contestant pickQueueWinner(int totalContestants)
         {
-            foreach(Contestant person in contestantList)
+            Contestant queueWinner = null;
+            Random pickContestant = new Random();
+            int contestantChoice = pickContestant.Next(0, totalContestants);
+            Console.WriteLine("And the lottery winner is...Number {0}, out of {1} contestants.", contestantChoice, totalContestants);
+            foreach(Contestant personStuff in contestantQueue)
             {
-                Console.WriteLine(person);
+                if (personStuff.lotteryNumber.Equals(contestantChoice))
+                {
+                    queueWinner = personStuff;
+                }
             }
+            return queueWinner;
+        } 
+        public Contestant pickStackWinner(int totalContestants)
+        {
+            Contestant stackWinner = null;
+            Random pickContestant = new Random();
+            int contestantChoice = pickContestant.Next(0, totalContestants);
+            Console.WriteLine("And the lottery winner is...Number {0}, out of {1} contestants.", contestantChoice, totalContestants);
+            foreach (Contestant person in contestantStack)
+            {
+                if (person.lotteryNumber.Equals(contestantChoice))
+                {
+                    stackWinner = person;
+                }
+            }
+            return stackWinner;
         }
-        //    Sweepstakes(string name)
-        //    void RegisterContestant(Contestant contestant)
-        //    string PickWinner()
-        //    void PrintContestantInfo(Contestant contestant)
+        public void printContestantInfo(Contestant contestant)
+        {
+            for(int i = 0;i < 70; i++)
+            {
+                Console.Write("*");
+                Thread.Sleep(25);
+            }
+            Console.WriteLine("\n\r" + contestant);
+        }
     }
 }

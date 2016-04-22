@@ -8,19 +8,26 @@ namespace Sweepstakes
 {
     class SweepstakesQueueManager : ISweepstakesManager
     {
-        Queue<Contestant> sweeps = new Queue<Contestant>();
         Sweepstakes sweepstakes;
+        public int contestantLimit;
         public Sweepstakes GetNextSweepstakesWinner()
         {
+            Contestant contestant;
             sweepstakes = new Sweepstakes("hizzlefasizzle");
-            Random pickWinner = new Random();
-            pickWinner.Next();
+            Console.WriteLine("Please enter the number of contestants that can enter into this sweepstakes.\n\r(Queue)");
+            bool check = int.TryParse(Console.ReadLine(), out contestantLimit);
+            if (!check) { Console.WriteLine("Invalid entry."); }
+            for (int i = 0; i < contestantLimit; i++)
+            {
+                contestant = new Contestant(i);
+                sweepstakes.registeQueuerContestant(contestant);
+            }
             return sweepstakes;
         }
-
         public void InsertSweepstakes(Sweepstakes sweepstakes)
         {
-            throw new NotImplementedException();
+            Contestant winner = sweepstakes.pickQueueWinner(contestantLimit);
+            sweepstakes.printContestantInfo(winner);
         }
     }
 }

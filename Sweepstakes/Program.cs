@@ -10,18 +10,13 @@ namespace Sweepstakes
     {
         static void Main(string[] args)
         {
-            Contestant contestant;
-            Sweepstakes sweepstakes = new Sweepstakes(null);
-            int contestantLimit;
-            Console.WriteLine("Please enter the number of contestants that can enter into this sweepstakes.");
-            bool check = int.TryParse(Console.ReadLine(), out contestantLimit);
-            if (!check) { Console.WriteLine("Invalid entry.");}
-            for (int i = 0;i < contestantLimit; i++)
-            {
-                contestant = new Contestant(i);
-                sweepstakes.registerContestant(contestant);
-            }
-            sweepstakes.printContestantInfo();
+            SweepstakesQueueManager queueSweeps = new SweepstakesQueueManager();
+            Sweepstakes sweeps1 = queueSweeps.GetNextSweepstakesWinner();
+            queueSweeps.InsertSweepstakes(sweeps1);
+
+            SweepstakesStackManager stackSweeps = new SweepstakesStackManager();
+            Sweepstakes sweeps2 = stackSweeps.GetNextSweepstakesWinner();
+            stackSweeps.InsertSweepstakes(sweeps2);
             Console.ReadKey();
         }
     }
