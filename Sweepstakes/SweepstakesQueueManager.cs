@@ -8,9 +8,14 @@ namespace Sweepstakes
 {
     class SweepstakesQueueManager : ISweepstakesManager
     {
+        Queue<Contestant> sweeps = new Queue<Contestant>();
+        Sweepstakes sweepstakes;
         public Sweepstakes GetNextSweepstakesWinner()
         {
-            throw new NotImplementedException();
+            sweepstakes = new Sweepstakes("hizzlefasizzle");
+            Random pickWinner = new Random();
+            pickWinner.Next();
+            return sweepstakes;
         }
 
         public void InsertSweepstakes(Sweepstakes sweepstakes)

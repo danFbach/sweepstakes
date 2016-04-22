@@ -8,13 +8,26 @@ namespace Sweepstakes
 {
     class Sweepstakes
     {
-        string name;
-        public void registerContestant(Contestant contestant)
-        { }
-        string pickWinner;
-        void printContestantInfo(Contestant contestant)
+        string sweepstakesName;
+        List<Contestant> contestantList = new List<Contestant>();
+        public Sweepstakes(string sweepstakesName)
         {
-
+            this.sweepstakesName = sweepstakesName;
+        }
+        public void registerContestant(Contestant contestant)
+        {
+            contestantList.Add(contestant);
+        }
+        Contestant pickWinner()
+        {
+            return contestantList[2];
+        }
+        public void printContestantInfo()
+        {
+            foreach(Contestant person in contestantList)
+            {
+                Console.WriteLine(person);
+            }
         }
         //    Sweepstakes(string name)
         //    void RegisterContestant(Contestant contestant)
