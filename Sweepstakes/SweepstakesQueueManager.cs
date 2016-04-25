@@ -13,7 +13,7 @@ namespace Sweepstakes
         public Sweepstakes GetNextSweepstakesWinner()
         {
             Contestant contestant;
-            sweepstakes = new Sweepstakes("hizzlefasizzle");
+            sweepstakes = new Sweepstakes("sweepstakes2");
             Console.WriteLine("Please enter the number of contestants that can enter into this sweepstakes.\n\r(Queue)");
             bool check = int.TryParse(Console.ReadLine(), out contestantLimit);
             if (!check) { Console.WriteLine("Invalid entry."); }
